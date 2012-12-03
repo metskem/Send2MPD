@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
@@ -16,6 +17,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,15 +36,15 @@ public class MainActivity extends Activity implements OnClickListener {
     public final static String EXTRA_MEDIAFILE = MainActivity.class.getPackage() + ".MEDIAFILE";
     public final static int ID_INTROTEXT = 4711;
     private MediaFile mediaFile;
+    private SharedPreferences sharedPrefs = null;
 
     @SuppressLint("NewApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "entering onCreate() ");
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         Intent intent = getIntent();
-        Log.e(TAG, "intent: " + intent);
 
         if (intent != null && intent.getExtras() != null) {
             setContentView(R.layout.activity_main);
@@ -145,19 +147,38 @@ public class MainActivity extends Activity implements OnClickListener {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            // fetch data
+            if (sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, null).length() > 0) {
+                if (sharedPrefs.getString(PrefsActivity.PREFS_PORT, null) != null &&sharedPrefs.getString(PrefsActivity.PREFS_PORT, null).length() > 0) {
+                    if (sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, null).length() > 0) {
+                        if (sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null).length() > 0) {
+                            if (sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null).length() > 0) {
+                                Log.e(TAG, "sending " + mediaFile);
+                                Intent intent = new Intent(this, FileSendActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.msg_null_hostname, Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.msg_null_port, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.msg_null_username, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.msg_null_password, Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.msg_null_destdir, Toast.LENGTH_LONG).show();
+            }
 
-            Log.e(TAG, "sending " + mediaFile);
-            Intent intent = new Intent(this, FileSendActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
-            intent.putExtras(bundle);
-            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), R.string.msg_network_down, Toast.LENGTH_LONG).show();
         }
     }
-
+    
     private void populateMediaFileFromView(View view) {
         EditText editText = (EditText) findViewById(R.id.artist);
         mediaFile.setArtist(editText.getText().toString());

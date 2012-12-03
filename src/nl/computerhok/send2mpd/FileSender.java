@@ -30,10 +30,10 @@ public class FileSender {
     }
 
     public void sendFile(final MediaFile mediaFile) throws Exception {
-        String hostname = sharedPrefs.getString("hostname", "defaultHost");
-        String username = sharedPrefs.getString("username", "defaultUser");
-        String password = sharedPrefs.getString("password", "defaultPassword");
-        String destdir = sharedPrefs.getString("destdir", "/tmp");
+        String hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
+        String username = sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, "defaultUser");
+        String password = sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, "defaultPassword");
+        String destdir = sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, "/tmp");
         jsch = new JSch();
         session = jsch.getSession(username, hostname, 22);
         Properties config = new java.util.Properties();
@@ -81,10 +81,10 @@ public class FileSender {
 
     public void updateMPDDatabase() throws UnknownHostException, IOException {
         Log.e(TAG, "updating MPD database");
-        String hostname = sharedPrefs.getString("hostname", "defaultHost");
+        String hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
         Socket socket = new Socket(hostname, 6600);
         PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
-        String[] commands = new String[] { "password " + sharedPrefs.getString("mpdpassword", "defaultMPDpassword"), "update", "close" };
+        String[] commands = new String[] { "password " + sharedPrefs.getString(PrefsActivity.PREFS_MPD_PASSWORD, "defaultMPDpassword"), "update", "close" };
         for (String cmd : commands) {
             writer.println(cmd);
         }

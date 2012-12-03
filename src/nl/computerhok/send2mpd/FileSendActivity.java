@@ -136,8 +136,8 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
                 dialog = builder.create();
                 dialog.show();
             } else {
-                hostname = sharedPrefs.getString("hostname", "defaultHost");
-              destdir = sharedPrefs.getString("destdir", "/tmp");
+                hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
+              destdir = sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, "/tmp");
                 builder.setMessage(getResources().getString(R.string.msg_file_send_success) + " " + hostname + ":" + destdir).setTitle(R.string.title_file_send_success);
                 builder.setPositiveButton(R.string.button_OK, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
