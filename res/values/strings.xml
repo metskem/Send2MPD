@@ -1,8 +1,48 @@
 <resources>
 
-    <string name="app_name">Send2MPD</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">MyFirstApp</string>
+    <string name="filename">Unknown filename</string>
+    <string name="filename_label">File name</string>
+    <string name="album">Unknown album</string>
+    <string name="album_label">Album</string>
+    <string name="artist">Unknown artist</string>
+    <string name="artist_label">Artist</string>
+    <string name="title">Unknown title</string>
+    <string name="title_label">Title</string>
+    <string name="duration">Unknown duration</string>
+    <string name="duration_label">Duration</string>
+    <string name="bitrate">Unknown bitrate</string>
+    <string name="bitrate_label">Bitrate</string>
+    <string name="button_save">Save</string>
+    <string name="button_send">Send</string>
+    <string name="button_OK">OK</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-
+    <string name="title_activity_main">MyFirstApp</string>
+    <string name="title_file_modify_and_save">Display MediaFile</string>
+    <string name="msg_file_send">Sending MediaFile to server</string>    
+    <string name="title_file_send">Sending File</string>
+    <string name="title_hostname">Hostname</string>
+    <string name="title_port">Port</string>
+    <string name="summary_hostname">Name of the host where MPD is running (and for ssh login)</string>
+    <string name="summary_port">Port used by the MPD server (default 6600)</string>
+    <string name="title_username">Username</string>
+    <string name="summary_username">The userid to (ssh) login with</string>
+    <string name="title_password">Password (ssh)</string>
+    <string name="title_mpdpassword">Password (mpd)</string>
+    <string name="summary_password">Password used for ssh login</string>
+    <string name="summary_mpdpassword">Password for the MPD server</string>
+    <string name="title_destdir">Destination directory</string>
+    <string name="summary_destdir">Directory on the server where to place the file</string>
+    <string name="title_activity_prefs">PrefsActivity</string>
+    <string name="title_prefs">Preferences</string>
+    <string name="msg_file_send_failed">Oeps, sending the mp3 file failed</string>
+    <string name="msg_file_send_success">File succesfully sent to </string>
+    <string name="msg_file_save_success">File succesfully saved</string>
+    <string name="title_file_send_failed">Error while sending file</string>
+    <string name="title_file_send_success">File send success</string>
+    <string name="title_file_save_success">File save success</string>
+    <string name="button_filesend_go_prefs">Go to preferences</string>
+    <string name="button_filesend_cancel">Cancel</string>
+    <string name="introtext">Welcome, you probably started me from the launcher, so I dont have an mp3 file now. Please start your favorite file explorer or music app and share an mp3 file with me (share/sendto).</string>
+    <string name="msg_network_down">No network available!</string> 
 </resources>

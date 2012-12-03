@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:key="hostname"
+        android:summary="@string/summary_hostname"
+        android:title="@string/title_hostname" />
+    <EditTextPreference
+        android:key="port"
+        android:summary="@string/summary_port"
+        android:title="@string/title_port"
+        android:defaultValue="6600" />
+    <EditTextPreference
+        android:key="username"
+        android:summary="@string/summary_username"
+        android:title="@string/title_username" />
+    <EditTextPreference
+        android:key="password"
+        android:password="true"
+        android:summary="@string/summary_password"
+        android:title="@string/title_password" />
+    <EditTextPreference
+        android:key="destdir"
+        android:summary="@string/summary_destdir"
+        android:title="@string/title_destdir"
+        android:defaultValue="/var/lib/mpd/music" />
+    <EditTextPreference
+        android:key="mpdpassword"
+        android:password="true"
+        android:summary="@string/summary_mpdpassword"
+        android:title="@string/title_mpdpassword" />
+    
+</PreferenceScreen>
