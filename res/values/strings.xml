@@ -13,8 +13,7 @@
     <string name="duration_label">Duration</string>
     <string name="bitrate">Unknown bitrate</string>
     <string name="bitrate_label">Bitrate</string>
-    <string name="button_save">Save</string>
-    <string name="button_send">Send</string>
+    <string name="button_send">Save and Send</string>
     <string name="button_OK">OK</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Send2MPD</string>
@@ -37,10 +36,8 @@
     <string name="title_prefs">Preferences</string>
     <string name="msg_file_send_failed">Oeps, sending the mp3 file failed</string>
     <string name="msg_file_send_success">File succesfully sent to </string>
-    <string name="msg_file_save_success">File succesfully saved</string>
     <string name="title_file_send_failed">Error while sending file</string>
     <string name="title_file_send_success">File send success</string>
-    <string name="title_file_save_success">File save success</string>
     <string name="button_filesend_go_prefs">Go to preferences</string>
     <string name="button_filesend_cancel">Cancel</string>
     <string name="introtext">Welcome, you probably started me from the launcher, so I dont have an mp3 file now. Please start your favorite file explorer or music app and share an mp3 file with me (share/sendto).</string>

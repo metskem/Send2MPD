@@ -1,11 +1,19 @@
 package nl.computerhok.send2mpd;
 
+import java.io.File;
+
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -13,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.TextView;
 
 public class FileSendActivity extends Activity implements OnSharedPreferenceChangeListener {
     private static final String TAG = FileSendActivity.class.getSimpleName();
@@ -20,15 +29,14 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
     private AlertDialog dialog = null;
     private String hostname;
     private String destdir;
-    private boolean sendRunning; 
+    private boolean sendRunning;
     public static final String SEND_RUNNING = "sendRunning";
     private AlertDialog.Builder builder;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             sendRunning = (Boolean) savedInstanceState.get(SEND_RUNNING);
         }
         Log.e(TAG, "entering onCreate() , instance " + this);
@@ -78,13 +86,15 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
             Log.e(TAG, "entering doInBackground() with " + mediaFile);
             sendRunning = true;
 
+            saveFile(mediaFile);
+
             FileSender sender = new FileSender(sharedPrefs);
-            
+
             try {
-                
-                sender.sendFile(mediaFile);
+
+                sender.sendFile(mediaFile, "aap.mp3");
                 sender.updateMPDDatabase();
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "exception occured in backgroundtask: " + e.getMessage());
                 return e;
@@ -137,7 +147,7 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
                 dialog.show();
             } else {
                 hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
-              destdir = sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, "/tmp");
+                destdir = sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, "/tmp");
                 builder.setMessage(getResources().getString(R.string.msg_file_send_success) + " " + hostname + ":" + destdir).setTitle(R.string.title_file_send_success);
                 builder.setPositiveButton(R.string.button_OK, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -157,6 +167,9 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
             Log.e(TAG, "entering onPreExecute()");
             builder = new AlertDialog.Builder(FileSendActivity.this);
             builder.setMessage(R.string.msg_file_send).setTitle(R.string.title_file_send);
+            if (dialog != null) {
+                dialog.dismiss();
+            }
             dialog = builder.create();
             dialog.show();
         }
@@ -173,4 +186,38 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         Log.e(TAG, "onSharedPreferenceChanged()");
     }
 
+    private void saveFile(final MediaFile mediaFile) {
+        AudioFile audioFile;
+        try {
+            audioFile = AudioFileIO.read(new File(mediaFile.getFullpath()));
+            Tag tag = audioFile.getTag();
+
+            // set the ID3 tags:
+            tag.setField(FieldKey.ALBUM, mediaFile.getAlbum());
+            tag.setField(FieldKey.ARTIST, mediaFile.getArtist());
+            tag.setField(FieldKey.TITLE, mediaFile.getTitle());
+            // the other tags from the file are considered read-only , and are not changed in this app
+
+            Log.e(TAG, "committing changes to " + audioFile.getFile().getCanonicalFile());
+            audioFile.commit();
+
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(new File(mediaFile.getFullpath())));
+            sendBroadcast(intent);
+            
+            return;
+
+        } catch (Exception e) {
+            String errorMsg = "exception while read/writing mp3 file: \n" + e;
+            Log.e(TAG, errorMsg);
+            e.printStackTrace();
+            TextView textView = new TextView(this);
+            textView.setTextSize(20);
+            textView.setText(errorMsg);
+            textView.setTextColor(Color.RED);
+            setContentView(textView);
+            return;
+        }
+
+    }
 }

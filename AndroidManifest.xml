@@ -31,13 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FileModifyAndSaveActivity"
-            android:label="@string/title_file_modify_and_save" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity
             android:name=".FileSendActivity"
             android:label="@string/title_file_send" >
             <meta-data

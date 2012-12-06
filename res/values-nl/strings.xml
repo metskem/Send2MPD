@@ -13,8 +13,7 @@
     <string name="duration_label">Lengte</string>
     <string name="bitrate">Onbekende bitrate</string>
     <string name="bitrate_label">Bitrate</string>
-    <string name="button_save">Opslaan</string>
-    <string name="button_send">Verzenden</string>
+    <string name="button_send">Opslaan en Verzenden</string>
     <string name="button_filesend_OK">Media bestand versturen gelukt</string>
     <string name="button_OK">OK</string>
     <string name="menu_settings">Instellingen</string>
@@ -38,16 +37,14 @@
     <string name="title_prefs">Voorkeuren</string>
     <string name="msg_file_send_failed">Oeps, het versturen van de mp3 file is vaut gegaan</string>
     <string name="msg_file_send_success">Bestand verzonden naar </string>
-    <string name="msg_file_save_success">Bestand opgeslagen</string>
     <string name="title_file_send_failed">Fout bij bestand sturen</string>
     <string name="title_file_send_success">Bestand versturen gelukt</string>
-    <string name="title_file_save_success">Bestand opslaan gelukt</string>
     <string name="button_filesend_go_prefs">Ga naar voorkeuren</string>
     <string name="button_filesend_cancel">Terug</string>
     <string name="introtext">Welkom, je hebt mij waarschijnlijk gestart vanaf de launcher, dus ik heb nu geen mp3 file om iets mee te doen. Start je favoriete file explorer of music app en deel een mp3 file met me. (delen/versturen)</string>
     <string name="msg_network_down">Geen netwerk beschikbaar!</string> 
     <string name="msg_null_hostname">Hostname niet opgegeven, controleer instellingen!</string> 
-    <string name="msg_null_port">Port niet opgegeven, controleer instellingen!</string> 
+    <string name="msg_null_port">Poort niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_username">Username niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_password">Password niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_destdir">Destination directory niet opgegeven, controleer instellingen!</string> 

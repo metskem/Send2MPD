@@ -129,17 +129,6 @@ public class MainActivity extends Activity implements OnClickListener {
         return true;
     }
 
-    /** Called when the user clicks the Save button */
-    public void save(View view) {
-        populateMediaFileFromView(view);
-        Log.e(TAG, "saving " + mediaFile);
-        Toast.makeText(getApplicationContext(), "saving " + mediaFile, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, FileModifyAndSaveActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
 
     /** Called when the user clicks the Send button */
     public void send(View view) {
@@ -159,21 +148,20 @@ public class MainActivity extends Activity implements OnClickListener {
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(), R.string.msg_null_hostname, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), R.string.msg_null_destdir, Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), R.string.msg_null_port, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.msg_null_password, Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.msg_null_username, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), R.string.msg_null_password, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.msg_null_port, Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), R.string.msg_null_destdir, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.msg_null_hostname, Toast.LENGTH_LONG).show();
             }
-
         } else {
             Toast.makeText(getApplicationContext(), R.string.msg_network_down, Toast.LENGTH_LONG).show();
         }
