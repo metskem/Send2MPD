@@ -18,6 +18,7 @@ public class MediaFile implements Serializable {
     private String title;
     private String duration;
     private String bitrate;
+    private String targetfilename;
 
     public String getFilename() {
         return filename;
@@ -70,7 +71,7 @@ public class MediaFile implements Serializable {
     @Override
     public String toString() {
         return "MediaFile [filename=" + filename + ", fullpath=" + fullpath + ", album=" + album + ", artist=" + artist + ", title=" + title + ", duration=" + duration
-                + ", bitrate=" + bitrate + "]";
+                + ", bitrate=" + bitrate + ", targetfilename=" + targetfilename + "]";
     }
 
     public String getFullpath() {
@@ -79,5 +80,13 @@ public class MediaFile implements Serializable {
 
     public void setFullpath(final String fullpath) {
         this.fullpath = fullpath;
+    }
+
+    public String getTargetfilename() {
+        return targetfilename;
+    }
+
+    public void setTargetfilename(final String targetfilename) {
+        this.targetfilename = targetfilename;
     }
 }

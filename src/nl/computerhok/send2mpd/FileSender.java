@@ -29,7 +29,7 @@ public class FileSender {
         this.sharedPrefs = sharedPrefs;
     }
 
-    public void sendFile(final MediaFile mediaFile, final String targetFileName) throws Exception {
+    public void sendFile(final MediaFile mediaFile) throws Exception {
         String hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
         String username = sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, "defaultUser");
         String password = sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, "defaultPassword");
@@ -45,13 +45,13 @@ public class FileSender {
         channel = session.openChannel("sftp");
         channel.connect();
         c = (ChannelSftp) channel;
-        c.put(mediaFile.getFullpath(), destdir + "/" + targetFileName);
+        c.put(mediaFile.getFullpath(), destdir + "/" + mediaFile.getTargetfilename());
 
         c.disconnect();
         
 
         // do a chmod for the file 
-        String targetFullPath = destdir + "/" + targetFileName;
+        String targetFullPath = destdir + "/" + mediaFile.getTargetfilename();
         String command = "ls -rtl '" + targetFullPath + "'; chmod 664 '" + targetFullPath + "'";
 
         channel = session.openChannel("exec");

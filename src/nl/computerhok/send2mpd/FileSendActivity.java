@@ -92,7 +92,7 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
 
             try {
 
-                sender.sendFile(mediaFile, "aap.mp3");
+                sender.sendFile(mediaFile);
                 sender.updateMPDDatabase();
 
             } catch (Exception e) {

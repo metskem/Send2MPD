@@ -19,6 +19,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,7 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, TextWatcher {
     private static final String TAG = MainActivity.class.getSimpleName();
     public final static String EXTRA_MEDIAFILE = MainActivity.class.getPackage() + ".MEDIAFILE";
     public final static int ID_INTROTEXT = 4711;
@@ -84,14 +86,16 @@ public class MainActivity extends Activity implements OnClickListener {
             EditText editedField = (EditText) findViewById(R.id.filename);
             editedField.setText(filename, TextView.BufferType.NORMAL);
 
-            editedField = (EditText) findViewById(R.id.album);
-            editedField.setText(mediaFile.getAlbum(), TextView.BufferType.NORMAL);
-
             editedField = (EditText) findViewById(R.id.artist);
             editedField.setText(mediaFile.getArtist(), TextView.BufferType.NORMAL);
+            editedField.addTextChangedListener(this);
 
             editedField = (EditText) findViewById(R.id.title);
             editedField.setText(mediaFile.getTitle(), TextView.BufferType.NORMAL);
+            editedField.addTextChangedListener(this);
+
+            editedField = (EditText) findViewById(R.id.album);
+            editedField.setText(mediaFile.getAlbum(), TextView.BufferType.NORMAL);
 
             TextView viewField = (TextView) findViewById(R.id.duration);
             viewField.setText(mediaFile.getDuration(), TextView.BufferType.NORMAL);
@@ -211,8 +215,31 @@ public class MainActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.e(TAG, "entering onClick()");
         startActivity(new Intent(getApplicationContext(), PrefsActivity.class));
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String fileName = null;
+        EditText editText = (EditText) findViewById(R.id.artist);
+        String artist = editText.getText().toString();
+        editText = (EditText) findViewById(R.id.title);
+        String title = editText.getText().toString();
+        
+        fileName = artist.trim() + " - " + title.trim() + ".mp3";
+       editText = (EditText) findViewById(R.id.filename);
+       editText.setText(fileName);
+       mediaFile.setTargetfilename(fileName);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // not implemented
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // not implemented
     }
 
 }
