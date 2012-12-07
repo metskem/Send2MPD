@@ -2,11 +2,6 @@ package nl.computerhok.send2mpd;
 
 import java.io.File;
 
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -187,30 +182,15 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
     }
 
     private void saveFile(final MediaFile mediaFile) {
-        AudioFile audioFile;
         try {
-            audioFile = AudioFileIO.read(new File(mediaFile.getFullpath()));
-            Tag tag = audioFile.getTag();
-
-            // set the ID3 tags:
-            tag.setField(FieldKey.ALBUM, mediaFile.getAlbum());
-            tag.setField(FieldKey.ARTIST, mediaFile.getArtist());
-            tag.setField(FieldKey.TITLE, mediaFile.getTitle());
-            // the other tags from the file are considered read-only , and are not changed in this app
-
-            Log.e(TAG, "committing changes to " + audioFile.getFile().getCanonicalFile());
-            audioFile.commit();
-
+            mediaFile.save();
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             intent.setData(Uri.fromFile(new File(mediaFile.getFullpath())));
             sendBroadcast(intent);
-            
-            return;
-
         } catch (Exception e) {
             String errorMsg = "exception while read/writing mp3 file: \n" + e;
-            Log.e(TAG, errorMsg);
             e.printStackTrace();
+            Log.e(TAG, errorMsg);
             TextView textView = new TextView(this);
             textView.setTextSize(20);
             textView.setText(errorMsg);

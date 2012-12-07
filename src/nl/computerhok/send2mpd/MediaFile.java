@@ -1,6 +1,12 @@
 package nl.computerhok.send2mpd;
 
+import java.io.File;
 import java.io.Serializable;
+
+import org.farng.mp3.AbstractMP3Tag;
+import org.farng.mp3.MP3File;
+
+import android.util.Log;
 
 /**
  * Simple JavaBean to hold all information (like file name and id3 tags from an mp3 file).
@@ -9,6 +15,7 @@ import java.io.Serializable;
  * 
  */
 public class MediaFile implements Serializable {
+    private static final String TAG = MediaFile.class.getSimpleName();
     private static final long serialVersionUID = 1L;
 
     private String filename;
@@ -33,7 +40,9 @@ public class MediaFile implements Serializable {
     }
 
     public void setAlbum(final String album) {
-        this.album = album;
+        if (album != null) {
+            this.album = album.trim();
+        }
     }
 
     public String getArtist() {
@@ -41,7 +50,9 @@ public class MediaFile implements Serializable {
     }
 
     public void setArtist(final String artist) {
-        this.artist = artist;
+        if (artist != null) {
+            this.artist = artist.trim();
+        }
     }
 
     public String getTitle() {
@@ -49,7 +60,9 @@ public class MediaFile implements Serializable {
     }
 
     public void setTitle(final String title) {
-        this.title = title;
+        if (title != null) {
+            this.title = title;
+        }
     }
 
     public String getDuration() {
@@ -67,6 +80,20 @@ public class MediaFile implements Serializable {
     public void setBitrate(final String bitrate) {
         this.bitrate = bitrate;
     }
+
+    public void save() throws Exception {
+        MP3File audioFile = new MP3File(new File(getFullpath()), true);
+        AbstractMP3Tag mp3tag = audioFile.getID3v1Tag();
+        if (mp3tag == null) {
+            mp3tag = audioFile.getID3v2Tag();
+        }
+        mp3tag.setLeadArtist(getArtist());
+        mp3tag.setAlbumTitle(getAlbum());
+        mp3tag.setSongTitle(getTitle());
+        Log.e(TAG, "committing changes to " + getFullpath());
+        audioFile.save();
+    }
+
 
     @Override
     public String toString() {

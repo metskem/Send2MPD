@@ -73,6 +73,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
                 filename = new File(fullpath).getName();
             }
             mediaFile.setFilename(filename);
+            mediaFile.setTargetfilename(filename);
             mediaFile.setFullpath(fullpath);
 
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
