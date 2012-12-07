@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">Send2MPD</string>
     <string name="album">Onbekend album</string>
     <string name="album_label">Album</string>
@@ -47,5 +46,6 @@
     <string name="msg_null_port">Poort niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_username">Username niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_password">Password niet opgegeven, controleer instellingen!</string> 
-    <string name="msg_null_destdir">Destination directory niet opgegeven, controleer instellingen!</string> 
+    <string name="msg_null_destdir">Doel directory niet opgegeven, controleer instellingen!</string> 
+    <string name="msg_null_targetfile">Doel bestandsnaam is leeg, controleer titel en artiest!</string> 
 </resources>

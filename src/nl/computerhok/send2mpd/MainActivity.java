@@ -104,7 +104,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             viewField.setText(mediaFile.getBitrate(), TextView.BufferType.SPANNABLE);
 
         } else {
-//            Log.e(TAG, "intent was null, we were probably started from launcher");
+            //            Log.e(TAG, "intent was null, we were probably started from launcher");
             // remove the usual views and add an intro text and a button to the prefs
             LayoutInflater inflater = getLayoutInflater();
             LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.activity_main, null);
@@ -133,7 +133,6 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         return true;
     }
 
-
     /** Called when the user clicks the Send button */
     public void send(View view) {
         populateMediaFileFromView(view);
@@ -141,16 +140,20 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             if (sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, null).length() > 0) {
-                if (sharedPrefs.getString(PrefsActivity.PREFS_PORT, null) != null &&sharedPrefs.getString(PrefsActivity.PREFS_PORT, null).length() > 0) {
+                if (sharedPrefs.getString(PrefsActivity.PREFS_PORT, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_PORT, null).length() > 0) {
                     if (sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_USERNAME, null).length() > 0) {
                         if (sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null).length() > 0) {
                             if (sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null).length() > 0) {
-                                Log.e(TAG, "sending " + mediaFile);
-                                Intent intent = new Intent(this, FileSendActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+                                if (mediaFile.getTargetfilename() != null && mediaFile.getTargetfilename().length() > 0) {
+                                    Log.e(TAG, "sending " + mediaFile);
+                                    Intent intent = new Intent(this, FileSendActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), R.string.msg_null_targetfile, Toast.LENGTH_LONG).show();
+                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), R.string.msg_null_destdir, Toast.LENGTH_LONG).show();
                             }
@@ -170,7 +173,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             Toast.makeText(getApplicationContext(), R.string.msg_network_down, Toast.LENGTH_LONG).show();
         }
     }
-    
+
     private void populateMediaFileFromView(View view) {
         EditText editText = (EditText) findViewById(R.id.artist);
         mediaFile.setArtist(editText.getText().toString());
@@ -225,11 +228,11 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         String artist = editText.getText().toString();
         editText = (EditText) findViewById(R.id.title);
         String title = editText.getText().toString();
-        
+
         fileName = artist.trim() + " - " + title.trim() + ".mp3";
-       editText = (EditText) findViewById(R.id.filename);
-       editText.setText(fileName);
-       mediaFile.setTargetfilename(fileName);
+        editText = (EditText) findViewById(R.id.filename);
+        editText.setText(fileName);
+        mediaFile.setTargetfilename(fileName);
     }
 
     @Override

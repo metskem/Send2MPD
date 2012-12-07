@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">Send2MPD</string>
     <string name="filename">Unknown filename</string>
     <string name="filename_label">File name</string>
@@ -47,4 +46,5 @@
     <string name="msg_null_username">Username not supplied, check preferences!</string> 
     <string name="msg_null_password">Password not supplied, check preferences!</string> 
     <string name="msg_null_destdir">Destination directory not supplied, check preferences!</string> 
+    <string name="msg_null_targetfile">Destination filename is empty, check title and artist!</string> 
 </resources>
