@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Send2MPD</string>
     <string name="filename">Unknown filename</string>
-    <string name="filename_label">File name</string>
+    <string name="filename_label">Local file name</string>
+    <string name="targetfilename_label">Target file name</string>
     <string name="album">Unknown album</string>
     <string name="album_label">Album</string>
     <string name="artist">Unknown artist</string>

@@ -3,7 +3,8 @@
     <string name="album">Onbekend album</string>
     <string name="album_label">Album</string>
     <string name="filename">Onbekende bestandsnaam</string>
-    <string name="filename_label">Bestand</string>
+    <string name="filename_label">Lokaal bestand</string>
+    <string name="targetfilename_label">Doel bestand</string>
     <string name="artist">Onbekende artiest</string>
     <string name="artist_label">Artiest</string>
     <string name="title">Onbekende titel</string>

@@ -103,7 +103,9 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
 
             viewField = (TextView) findViewById(R.id.bitrate);
             viewField.setText(mediaFile.getBitrate(), TextView.BufferType.SPANNABLE);
-
+            
+            // make the target file name initially well propagated
+            afterTextChanged(null);
         } else {
             //            Log.e(TAG, "intent was null, we were probably started from launcher");
             // remove the usual views and add an intro text and a button to the prefs
@@ -231,7 +233,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         String title = editText.getText().toString();
 
         fileName = artist.trim() + " - " + title.trim() + ".mp3";
-        editText = (EditText) findViewById(R.id.filename);
+        editText = (EditText) findViewById(R.id.targetfilename);
         editText.setText(fileName);
         mediaFile.setTargetfilename(fileName);
     }
