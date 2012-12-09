@@ -36,6 +36,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
     private static final String TAG = MainActivity.class.getSimpleName();
     public final static String EXTRA_MEDIAFILE = MainActivity.class.getPackage() + ".MEDIAFILE";
     public final static int ID_INTROTEXT = 4711;
+    public final static int ID_VERSIONINFO = 4712;
     private MediaFile mediaFile;
     private SharedPreferences sharedPrefs = null;
 
@@ -101,6 +102,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             afterTextChanged(null);
         } else {
             //            Log.e(TAG, "intent was null, we were probably started from launcher");
+            
             // remove the usual views and add an intro text and a button to the prefs
             LayoutInflater inflater = getLayoutInflater();
             LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.activity_main, null);
@@ -113,6 +115,16 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             intro.setBackgroundColor(Color.LTGRAY);
             intro.setPadding(15, 15, 15, 15);
             layout.addView(intro);
+
+            // add the version info to the welcome screen
+            TextView versioninfo = new TextView(getApplicationContext());
+            versioninfo.setId(ID_VERSIONINFO);
+            versioninfo.setText("Version: " + Send2MPDConstants.VERSION);
+            versioninfo.setTextSize(15);
+            versioninfo.setTextColor(Color.BLACK);
+            versioninfo.setBackgroundColor(Color.LTGRAY);
+            versioninfo.setPadding(15, 15, 15, 15);
+            layout.addView(versioninfo);
 
             Button button = new Button(getApplicationContext());
             button.setText(R.string.menu_settings);
