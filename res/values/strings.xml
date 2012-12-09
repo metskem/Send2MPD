@@ -49,5 +49,5 @@
     <string name="msg_null_password">Password not supplied, check preferences!</string> 
     <string name="msg_null_destdir">Destination directory not supplied, check preferences!</string> 
     <string name="msg_null_targetfile">Destination filename is empty, check title and artist!</string>
-    <string name="crash_toast_text">Send2MPD has crashed!</string>
+    <string name="crash_toast_text">Send2MPD has crashed!  Please mail a report to the developer for fixing the issue!</string>
 </resources>

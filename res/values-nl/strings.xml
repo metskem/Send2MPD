@@ -50,5 +50,5 @@
     <string name="msg_null_password">Password niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_destdir">Doel directory niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_targetfile">Doel bestandsnaam is leeg, controleer titel en artiest!</string> 
-    <string name="crash_toast_text">Send2MPD is ingestort!</string>
+    <string name="crash_toast_text">Send2MPD is ingestort!   Stuur aub een mail naar de ontwikkelaar om het op te lossen!</string>
 </resources>
