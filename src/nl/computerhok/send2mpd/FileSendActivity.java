@@ -34,7 +34,6 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         if (savedInstanceState != null) {
             sendRunning = (Boolean) savedInstanceState.get(SEND_RUNNING);
         }
-        Log.e(TAG, "entering onCreate() , instance " + this);
         if (!sendRunning) {
             sendRunning = true;
             sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -58,7 +57,6 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.e(TAG, "entering onSaveInstanceState()");
         super.onSaveInstanceState(outState);
         outState.putBoolean(SEND_RUNNING, sendRunning);
         dialog.dismiss();
@@ -78,7 +76,6 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         @Override
         protected Exception doInBackground(MediaFile... mediaFiles) {
             MediaFile mediaFile = mediaFiles[0];
-            Log.e(TAG, "entering doInBackground() with " + mediaFile);
             sendRunning = true;
 
             saveFile(mediaFile);
@@ -102,7 +99,6 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Log.e(TAG, "entering onCancelled()");
         }
 
         @Override
@@ -159,7 +155,6 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e(TAG, "entering onPreExecute()");
             builder = new AlertDialog.Builder(FileSendActivity.this);
             builder.setMessage(R.string.msg_file_send).setTitle(R.string.title_file_send);
             if (dialog != null) {
@@ -172,13 +167,11 @@ public class FileSendActivity extends Activity implements OnSharedPreferenceChan
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            Log.e(TAG, "entering onProgressUpdate() with values " + values);
         }
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.e(TAG, "onSharedPreferenceChanged()");
     }
 
     private void saveFile(final MediaFile mediaFile) {

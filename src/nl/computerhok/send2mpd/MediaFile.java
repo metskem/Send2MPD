@@ -3,8 +3,10 @@ package nl.computerhok.send2mpd;
 import java.io.File;
 import java.io.Serializable;
 
-import org.farng.mp3.AbstractMP3Tag;
-import org.farng.mp3.MP3File;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
 
 import android.util.Log;
 
@@ -82,24 +84,19 @@ public class MediaFile implements Serializable {
     }
 
     public void save() throws Exception {
-        MP3File audioFile = new MP3File(new File(getFullpath()), true);
-        AbstractMP3Tag mp3tag1 = audioFile.getID3v1Tag();
-        if (mp3tag1 != null) {
-            mp3tag1.setLeadArtist(getArtist());
-            mp3tag1.setAlbumTitle(getAlbum());
-            mp3tag1.setSongTitle(getTitle());
-            Log.e(TAG, "modifying ID3v1 tags");
-        }
-        AbstractMP3Tag mp3tag2 = audioFile.getID3v2Tag();
-        if (mp3tag2 != null) {
-            mp3tag2.setLeadArtist(getArtist());
-            mp3tag2.setAlbumTitle(getAlbum());
-            mp3tag2.setSongTitle(getTitle());
-            Log.e(TAG, "modifying ID3v2 tags");
-        }
 
-        Log.e(TAG, "committing changes to " + getFullpath());
-        audioFile.save();
+        AudioFile audioFile;
+            audioFile = AudioFileIO.read(new File(getFullpath()));
+            Tag tag = audioFile.getTag();
+
+            // set all the ID3 tags:
+            tag.setField(FieldKey.ALBUM, getAlbum());
+            tag.setField(FieldKey.ARTIST, getArtist());
+            tag.setField(FieldKey.TITLE, getTitle());
+            // the other tags from the file are considered read-only , and are not changed in this app
+
+            Log.e(TAG, "committing changes to " + audioFile.getFile().getCanonicalFile());
+            audioFile.commit();
     }
 
     @Override

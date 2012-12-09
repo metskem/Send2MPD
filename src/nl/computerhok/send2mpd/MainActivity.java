@@ -1,7 +1,6 @@
 package nl.computerhok.send2mpd;
 
 import java.io.File;
-import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -54,12 +53,6 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             Bundle bundle = intent.getExtras();
             mediaFile = new MediaFile();
             Uri audioUri = bundle.getParcelable(Intent.EXTRA_STREAM);
-            Log.e(TAG, "found stream " + audioUri);
-            Set<String> bundleKeys = bundle.keySet();
-            for (String key : bundleKeys) {
-                Object value = bundle.get(key);
-                Log.e(TAG, "key " + key + "=" + value + "  --  class:" + value.getClass());
-            }
 
             String filename = "UNKNOWN_FILENAME";
             String fullpath = "UNKNOW_PATH";
