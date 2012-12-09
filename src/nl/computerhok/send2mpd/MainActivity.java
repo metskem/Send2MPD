@@ -21,11 +21,13 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -107,7 +109,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             LayoutInflater inflater = getLayoutInflater();
             LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.activity_main, null);
             layout.removeAllViews();
-            TextView intro = new TextView(getApplicationContext());
+            BorderedTextView intro = new BorderedTextView(getApplicationContext());
             intro.setId(ID_INTROTEXT);
             intro.setText(R.string.introtext);
             intro.setTextSize(20);
@@ -117,12 +119,13 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
             layout.addView(intro);
 
             // add the version info to the welcome screen
-            TextView versioninfo = new TextView(getApplicationContext());
+            BorderedTextView versioninfo = new BorderedTextView(getApplicationContext());
             versioninfo.setId(ID_VERSIONINFO);
-            versioninfo.setText("Version: " + Send2MPDConstants.VERSION);
+            versioninfo.setText("Version info: " + Send2MPDConstants.VERSION);
             versioninfo.setTextSize(15);
             versioninfo.setTextColor(Color.BLACK);
             versioninfo.setBackgroundColor(Color.LTGRAY);
+            versioninfo.setGravity(Gravity.CENTER_HORIZONTAL);
             versioninfo.setPadding(15, 15, 15, 15);
             layout.addView(versioninfo);
 
