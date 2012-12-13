@@ -22,18 +22,20 @@
                 android:text="@string/filename_label"
                 android:textColor="@android:color/white"
                 android:textSize="20dp" />
-
+            
             <EditText
                 android:id="@+id/filename"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:textSize="15dp"
-                android:inputType="none"
+                android:background="@android:color/darker_gray"
+                android:bottomRightRadius="15dp"
                 android:editable="false"
-                android:bottomRightRadius="15dp"/>
+                android:inputType="none"
+                android:textSize="15dp" />
+        
         </TableRow>
 
-        <TableRow android:padding="2dp" >
+<TableRow android:padding="2dp" >
 
             <TextView
                 android:id="@+id/targetfilename_label"
@@ -49,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:textSize="15dp"
+                android:background="@android:color/darker_gray"
                 android:inputType="none"
                 android:editable="false"
                 android:bottomRightRadius="15dp"/>
