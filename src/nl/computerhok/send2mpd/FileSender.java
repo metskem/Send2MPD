@@ -66,10 +66,10 @@ public class FileSender {
                 int i = in.read(tmp, 0, 1024);
                 if (i < 0)
                     break;
-                Log.e(TAG, (new String(tmp, 0, i)));
+//                Log.e(TAG, (new String(tmp, 0, i)));
             }
             if (channel.isClosed()) {
-                Log.e(TAG, "exit-status: " + channel.getExitStatus());
+//                Log.e(TAG, "exit-status: " + channel.getExitStatus());
                 break;
             }
         }
@@ -80,7 +80,7 @@ public class FileSender {
     }
 
     public void updateMPDDatabase() throws UnknownHostException, IOException {
-        Log.e(TAG, "updating MPD database");
+//        Log.e(TAG, "updating MPD database");
         String hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
         Socket socket = new Socket(hostname, 6600);
         PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);

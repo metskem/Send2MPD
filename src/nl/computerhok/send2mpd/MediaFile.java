@@ -95,7 +95,7 @@ public class MediaFile implements Serializable {
             tag.setField(FieldKey.TITLE, getTitle());
             // the other tags from the file are considered read-only , and are not changed in this app
 
-            Log.e(TAG, "committing changes to " + audioFile.getFile().getCanonicalFile());
+//            Log.e(TAG, "committing changes to " + audioFile.getFile().getCanonicalFile());
             audioFile.commit();
     }
 

@@ -155,7 +155,7 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
                         if (sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null).length() > 0) {
                             if (sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null).length() > 0) {
                                 if (mediaFile.getTargetfilename() != null && mediaFile.getTargetfilename().length() > 0) {
-                                    Log.e(TAG, "sending " + mediaFile);
+//                                    Log.e(TAG, "sending " + mediaFile);
                                     Intent intent = new Intent(this, FileSendActivity.class);
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
