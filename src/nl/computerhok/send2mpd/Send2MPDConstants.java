@@ -3,5 +3,5 @@ package nl.computerhok.send2mpd;
 public class Send2MPDConstants {
 
     /** The Version of Send2MPD. */
-    public static final String VERSION = "2012-12-13 21:50";
+    public static final String VERSION = "2012-12-14 21:23";
 }
