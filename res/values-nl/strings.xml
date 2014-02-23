@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Send2MPD</string>
-    <string name="app_description">Stuur (aangepaste ID3 tags) mp3 bestanden naar een MPD server.</string>
+    <string name="app_description">Stuur (aangepaste ID3 tags) mp3 bestanden naar een MPD server via scp.</string>
     <string name="album">Onbekend album</string>
     <string name="album_label">Album</string>
     <string name="filename">Onbekende bestandsnaam</string>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Send2MPD</string>
-    <string name="app_description">Send (ID3 tags modified) mp3 files to MPD server.</string>
+    <string name="app_description">Send (ID3 tags modified) mp3 files to MPD server using scp.</string>
     <string name="filename">Unknown filename</string>
     <string name="filename_label">Local file name</string>
     <string name="targetfilename_label">Target file name</string>
