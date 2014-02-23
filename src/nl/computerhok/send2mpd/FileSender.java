@@ -10,11 +10,7 @@ import java.util.Properties;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
+import com.jcraft.jsch.*;
 
 public class FileSender {
 
@@ -79,10 +75,10 @@ public class FileSender {
 
     }
 
-    public void updateMPDDatabase() throws UnknownHostException, IOException {
+    public void updateMPDDatabase() throws IOException {
 //        Log.e(TAG, "updating MPD database");
         String hostname = sharedPrefs.getString(PrefsActivity.PREFS_HOSTNAME, "defaultHost");
-        Socket socket = new Socket(hostname, 6600);
+        Socket socket = new Socket(hostname, Integer.valueOf(sharedPrefs.getString(PrefsActivity.PREFS_PORT, "defaultPort")));
         PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
         String[] commands = new String[] { "password " + sharedPrefs.getString(PrefsActivity.PREFS_MPD_PASSWORD, "defaultMPDpassword"), "update", "close" };
         for (String cmd : commands) {

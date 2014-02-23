@@ -143,6 +143,16 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         return true;
     }
 
+    /**
+     * Handler for the settings button.
+     *
+     * @param view
+     */
+    public void settings(View view) {
+        startActivity(new Intent(getApplicationContext(), PrefsActivity.class));
+    }
+
+
     /** Called when the user clicks the Send button */
     public void send(View view) {
         populateMediaFileFromView(view);
@@ -155,12 +165,12 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
                         if (sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_PASSWORD, null).length() > 0) {
                             if (sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null) != null && sharedPrefs.getString(PrefsActivity.PREFS_DESTDIR, null).length() > 0) {
                                 if (mediaFile.getTargetfilename() != null && mediaFile.getTargetfilename().length() > 0) {
-//                                    Log.e(TAG, "sending " + mediaFile);
-                                    Intent intent = new Intent(this, FileSendActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable(EXTRA_MEDIAFILE, mediaFile);
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);
+
+                                    Log.e(TAG, "Starting AsyncTask for sending " + mediaFile);
+                                    AsyncFileSenderTask senderTask = new AsyncFileSenderTask(this);
+                                    senderTask.execute(mediaFile);
+                                    Toast.makeText(getApplicationContext(),R.string.filestransferstarted, Toast.LENGTH_SHORT).show();
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), R.string.msg_null_targetfile, Toast.LENGTH_LONG).show();
                                 }
@@ -199,8 +209,6 @@ public class MainActivity extends Activity implements OnClickListener, TextWatch
         mediaFile.setFilename(editText.getText().toString());
     }
 
-    @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = { MediaStore.Audio.Media.DATA };
         Cursor cursor = null;

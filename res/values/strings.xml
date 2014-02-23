@@ -42,6 +42,7 @@
     <string name="button_filesend_go_prefs">Go to preferences</string>
     <string name="button_filesend_cancel">Cancel</string>
     <string name="introtext">Welcome, you probably started me from the launcher, so I dont have an mp3 file now. Please start your favorite file explorer or music app and share an mp3 file with me (share/sendto).</string>
+    <string name="filestransferstarted">File transfer started</string>
     <string name="msg_network_down">No network available!</string> 
     <string name="msg_null_hostname">Hostname not supplied, check preferences!</string> 
     <string name="msg_null_port">Port not supplied, check preferences!</string> 
@@ -49,5 +50,5 @@
     <string name="msg_null_password">Password not supplied, check preferences!</string> 
     <string name="msg_null_destdir">Destination directory not supplied, check preferences!</string> 
     <string name="msg_null_targetfile">Destination filename is empty, check title and artist!</string>
-    <string name="crash_toast_text">Send2MPD has crashed!  Please mail a report to the developer for fixing the issue!</string>
+    <string name="button_prefs">Settings</string>
 </resources>

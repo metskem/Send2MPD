@@ -43,12 +43,13 @@
     <string name="button_filesend_go_prefs">Ga naar voorkeuren</string>
     <string name="button_filesend_cancel">Terug</string>
     <string name="introtext">Welkom, je hebt mij waarschijnlijk gestart vanaf de launcher, dus ik heb nu geen mp3 file om iets mee te doen. Start je favoriete file explorer of music app en deel een mp3 file met me. (delen/versturen)</string>
+    <string name="filestransferstarted">Bestand versturen gestart</string>
     <string name="msg_network_down">Geen netwerk beschikbaar!</string> 
     <string name="msg_null_hostname">Hostname niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_port">Poort niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_username">Username niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_password">Password niet opgegeven, controleer instellingen!</string> 
     <string name="msg_null_destdir">Doel directory niet opgegeven, controleer instellingen!</string> 
-    <string name="msg_null_targetfile">Doel bestandsnaam is leeg, controleer titel en artiest!</string> 
-    <string name="crash_toast_text">Send2MPD is ingestort!   Stuur aub een mail naar de ontwikkelaar om het op te lossen!</string>
+    <string name="msg_null_targetfile">Doel bestandsnaam is leeg, controleer titel en artiest!</string>
+    <string name="button_prefs">Instellingen</string>
 </resources>

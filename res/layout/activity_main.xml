@@ -17,7 +17,7 @@
             <TextView
                 android:id="@+id/filename_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/filename_label"
                 android:textColor="@android:color/white"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/targetfilename_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/targetfilename_label"
                 android:textColor="@android:color/white"
@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/artist_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/artist_label"
                 android:textColor="@android:color/white"
@@ -81,7 +81,7 @@
             <TextView
                 android:id="@+id/title_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/title_label"
                 android:textColor="@android:color/white"
@@ -100,7 +100,7 @@
             <TextView
                 android:id="@+id/album_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/album_label"
                 android:textColor="@android:color/white"
@@ -119,7 +119,7 @@
             <TextView
                 android:id="@+id/duration_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/duration_label"
                 android:textColor="@android:color/white"
@@ -141,7 +141,7 @@
             <TextView
                 android:id="@+id/bitrate_label"
                 android:layout_width="wrap_content"
-                android:gravity="right"
+                android:gravity="left"
                 android:height="25dp"
                 android:text="@string/bitrate_label"
                 android:textColor="@android:color/white"
@@ -159,10 +159,16 @@
         </TableRow>
     </TableLayout>
 
-        <Button
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="send"
             android:text="@string/button_send" />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="settings"
+            android:text="@string/button_prefs" />
 
 </LinearLayout>
